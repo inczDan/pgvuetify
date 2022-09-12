@@ -13,32 +13,48 @@
     <!-- fim botao logout -->
 
     <!--INICIO ITEM DE ANOTAÇOES -->
-    <v-form ref="form" v-model="valid" lazy-validation>
-      <v-text-field
-        v-model="title"
-        :counter="40"
-        :rules="titleRules"
-        label="Titulo"
-        required
-      ></v-text-field>
+    <v-layout justify-center>
+      <v-form ref="form" v-model="valid" lazy-validation>
+        <v-row>
+          <v-col cols="40">
+            <v-text-field
+              v-model="title"
+              :counter="40"
+              :rules="titleRules"
+              label="Titulo"
+              color="orange orange-darken-4"
+              required
+            ></v-text-field>
 
-      <v-text-field
-        v-model="conteudo"
-        :rules="conteudoRules"
-        label="Conteúdo"
-        required
-      ></v-text-field>
+            <v-textarea
+              v-model="conteudo"
+              :rules="conteudoRules"
+              label="Conteúdo"
+              color="orange orange-darken-4"
+              required
+            ></v-textarea>
 
-      <v-text-field v-model="data" :counter="40" label="Data"></v-text-field>
+            <v-text-field
+              v-model="data"
+              :counter="40"
+              label="Data"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+        <v-btn
+          :disabled="!valid"
+          color="success"
+          class="mr-4"
+          @click="validate"
+        >
+          Salvar
+        </v-btn>
 
-      <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">
-        Salvar
-      </v-btn>
+        <v-btn color="error" class="mr-4" @click="reset"> Excluir </v-btn>
 
-      <v-btn color="error" class="mr-4" @click="reset"> Excluir </v-btn>
-
-      <v-btn color="warning" @click="resetValidation"> Editar </v-btn>
-    </v-form>
+        <v-btn color="warning" @click="resetValidation"> Editar </v-btn>
+      </v-form>
+    </v-layout>
   </div>
 </template>
 
