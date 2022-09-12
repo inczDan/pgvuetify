@@ -1,82 +1,44 @@
 <template>
   <div>
     <font-awesome-icon icon="spinner" />
+    <!-- area do botao de logout -->
     <v-layout justify-end>
       <v-btn class="margem" color="primary" @click="voltaParaLogin">
         Logout
       </v-btn>
     </v-layout>
-    <template>
-      <v-card :loading="loading" class="mx-auto my-12" max-width="374">
-        <template slot="progress">
-          <v-progress-linear
-            color="deep-purple"
-            height="10"
-            indeterminate
-          ></v-progress-linear>
-        </template>
+    <v-btn class="mx-2 criar-tarefa" fab dark color="indigo">
+      <v-icon dark> mdi-plus </v-icon>
+    </v-btn>
+    <!-- fim botao logout -->
 
-        <v-img
-          height="250"
-          src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-        ></v-img>
+    <!--INICIO ITEM DE ANOTAÇOES -->
+    <v-form ref="form" v-model="valid" lazy-validation>
+      <v-text-field
+        v-model="title"
+        :counter="40"
+        :rules="titleRules"
+        label="Titulo"
+        required
+      ></v-text-field>
 
-        <v-card-title>Cafe Badilico</v-card-title>
+      <v-text-field
+        v-model="conteudo"
+        :rules="conteudoRules"
+        label="Conteúdo"
+        required
+      ></v-text-field>
 
-        <v-card-text>
-          <v-row align="center" class="mx-0">
-            <v-rating
-              :value="4.5"
-              color="amber"
-              dense
-              half-increments
-              readonly
-              size="14"
-            ></v-rating>
+      <v-text-field v-model="data" :counter="40" label="Data"></v-text-field>
 
-            <div class="grey--text ms-4">4.5 (413)</div>
-          </v-row>
+      <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">
+        Salvar
+      </v-btn>
 
-          <div class="my-4 text-subtitle-1">$ • Italian, Cafe</div>
+      <v-btn color="error" class="mr-4" @click="reset"> Excluir </v-btn>
 
-          <div>
-            Small plates, salads & sandwiches - an intimate setting with 12
-            indoor seats plus patio seating.
-          </div>
-        </v-card-text>
-
-        <v-divider class="mx-4"></v-divider>
-
-        <v-card-title>Tonight's availability</v-card-title>
-
-        <v-card-text>
-          <v-chip-group
-            v-model="selection"
-            active-class="deep-purple accent-4 white--text"
-            column
-          >
-            <v-chip>5:30PM</v-chip>
-
-            <v-chip>7:30PM</v-chip>
-
-            <v-chip>8:00PM</v-chip>
-
-            <v-chip>9:00PM</v-chip>
-          </v-chip-group>
-        </v-card-text>
-
-        <v-card-actions>
-          <v-btn color="deep-purple lighten-2" text @click="reserve">
-            Reserve
-          </v-btn>
-          <!-- icon coração -->
-          <v-btn class="mx-2" fab dark small color="pink">
-            <v-icon dark> mdi-heart </v-icon>
-            <!-- fim icon coração -->
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </template>
+      <v-btn color="warning" @click="resetValidation"> Editar </v-btn>
+    </v-form>
   </div>
 </template>
 
@@ -85,6 +47,14 @@ export default {
   data: () => ({
     loading: false,
     selection: 1,
+    valid: true,
+    title: "",
+    titleRules: [(v) => !!v || "É preciso escrever um titulo!"],
+    conteudo: "",
+    conteudoRules: [(v) => !!v || "É preciso escrever algo"],
+    data: new Date.toString(),
+    select: null,
+    checkbox: false,
   }),
 
   methods: {
@@ -96,6 +66,15 @@ export default {
     voltaParaLogin() {
       this.$router.push("/login");
     },
+    validate() {
+      this.$refs.form.validate();
+    },
+    reset() {
+      this.$refs.form.reset();
+    },
+    resetValidation() {
+      this.$refs.form.resetValidation();
+    },
   },
 };
 </script>
@@ -103,5 +82,8 @@ export default {
 .margem {
   margin-right: 15px;
   margin-top: 20px;
+}
+.criar-tarefa {
+  margin-right: 50%;
 }
 </style>
