@@ -41,12 +41,7 @@
             ></v-text-field>
           </v-col>
         </v-row>
-        <v-btn
-          :disabled="!valid"
-          color="success"
-          class="mr-4"
-          @click="validate"
-        >
+        <v-btn :disabled="valid" color="success" class="mr-4" @click="validate">
           Salvar
         </v-btn>
 
@@ -69,8 +64,6 @@ export default {
     conteudo: "",
     conteudoRules: [(v) => !!v || "É preciso escrever algo"],
     data: new Date.toString(),
-    select: null,
-    checkbox: false,
   }),
 
   methods: {

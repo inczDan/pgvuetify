@@ -36,7 +36,7 @@
       </v-row>
       <v-row align="center" justify="space-around">
         <v-layout justify-center>
-          <v-btn class="btn-login" color="primary" @click="vaiParaLogin">
+          <v-btn class="btn-login" color="primary" @click="vaiParaInicio">
             Login
           </v-btn>
           <v-btn
@@ -60,8 +60,8 @@ export default {
   }),
 
   methods: {
-    vaiParaLogin() {
-      this.$router.push("/");
+    vaiParaInicio() {
+      this.$router.push("/home");
     },
     vaiParaRegistro() {
       this.$router.push("/registrar");
