@@ -5,9 +5,11 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "mock": "vue-cli-service json"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "core-js": "^3.8.3",
     "vue": "^2.6.14",
     "vue-router": "^3.5.1",

@@ -34,7 +34,9 @@
                 >
 
                 <v-card-actions>
-                  <v-btn text> Nova anotação </v-btn>
+                  <v-btn outlined rounded @click="vaiParaCriarAnotacao">
+                    Nova anotação
+                  </v-btn>
                 </v-card-actions>
               </v-card>
             </v-col>
@@ -105,5 +107,10 @@ export default {
       },
     ],
   }),
+  methods: {
+    vaiParaCriarAnotacao() {
+      this.$router.push("/anotacao");
+    },
+  },
 };
 </script>

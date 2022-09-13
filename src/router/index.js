@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import HomeView from "@/views/HomeView.vue";
+import AnotacaoView from "@/views/AnotacaoView.vue";
 import LoginView from "@/views/LoginView.vue";
 import RegistroView from "@/views/RegistroView.vue";
 import InicioView from "@/views/InicioView.vue";
@@ -14,9 +14,9 @@ const routes = [
     component: InicioView,
   },
   {
-    path: "/home",
-    name: "home",
-    component: HomeView,
+    path: "/anotacao",
+    name: "anotacao",
+    component: AnotacaoView,
   },
   {
     path: "/about",
