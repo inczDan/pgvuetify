@@ -64,7 +64,7 @@ export default {
 
   methods: {
     vaiParaInicio() {
-      this.$router.push("/home");
+      this.$router.push("/resumo");
     },
     vaiParaRegistro() {
       this.$router.push("/registrar");

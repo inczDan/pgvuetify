@@ -4,6 +4,7 @@ import HomeView from "@/views/HomeView.vue";
 import LoginView from "@/views/LoginView.vue";
 import RegistroView from "@/views/RegistroView.vue";
 import InicioView from "@/views/InicioView.vue";
+import PainelResumoView from "@/views/PainelResumoView.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -26,6 +27,7 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
+
   {
     path: "/login",
     name: "login",
@@ -35,6 +37,11 @@ const routes = [
     path: "/registrar",
     name: "registrar",
     component: RegistroView,
+  },
+  {
+    path: "/resumo",
+    name: "resumo-anotações",
+    component: PainelResumoView,
   },
 ];
 
