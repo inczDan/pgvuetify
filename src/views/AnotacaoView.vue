@@ -7,9 +7,7 @@
         Logout
       </v-btn>
     </v-layout>
-    <v-btn class="mx-2 criar-tarefa" fab dark color="indigo">
-      <v-icon dark> mdi-plus </v-icon>
-    </v-btn>
+
     <!-- fim botao logout -->
 
     <!--INICIO ITEM DE ANOTAÇOES -->
