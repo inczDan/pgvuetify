@@ -78,6 +78,14 @@
               </v-card>
             </v-col>
           </v-row>
+          <div>
+            <ul>
+              <li v-for="i in tasks" :key="i.id">
+                <p>{{ i.project }}</p>
+                <p>{{ i.title }}</p>
+              </li>
+            </ul>
+          </div>
         </v-container>
       </v-card>
       <router-view></router-view>
@@ -90,8 +98,10 @@
 </template>
 
 <script>
+import apiMethods from "@/apiMethods.js";
 export default {
   data: () => ({
+    tasks: [],
     value: 1,
     items: [
       {
@@ -111,6 +121,14 @@ export default {
     vaiParaCriarAnotacao() {
       this.$router.push("/anotacao");
     },
+    getTasks() {
+      apiMethods.getData((data) => {
+        this.tasks = data;
+      });
+    },
+  },
+  created() {
+    this.getTasks();
   },
 };
 </script>

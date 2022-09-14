@@ -3,7 +3,10 @@
     <font-awesome-icon icon="spinner" />
     <!-- area do botao de logout -->
     <v-layout justify-end>
-      <v-btn class="margem" color="primary" @click="voltaParaLogin">
+      <v-btn class="margem" color="primary" @click="voltaParaResumo">
+        Return
+      </v-btn>
+      <v-btn class="margem" color="warning" @click="voltaParaLogin">
         Logout
       </v-btn>
     </v-layout>
@@ -16,7 +19,7 @@
         <v-row>
           <v-col cols="40">
             <v-text-field
-              v-model="title"
+              v-model="newTask.title"
               :counter="40"
               :rules="titleRules"
               label="Titulo"
@@ -24,51 +27,53 @@
               required
             ></v-text-field>
 
-            <v-textarea
-              v-model="conteudo"
+            <v-select
+              v-model="newTask.project"
               :rules="conteudoRules"
-              label="Conteúdo"
+              label="Tema"
               color="orange orange-darken-4"
               required
-            ></v-textarea>
+              :items="['Estudos', 'Saúde', 'Financeiro']"
+            ></v-select>
 
-            <v-text-field
-              v-model="data"
-              :counter="40"
-              label="Data"
-            ></v-text-field>
+            <v-text-field v-model="newTask.dueTo" :counter="40" label="Data">{{
+              dhm
+            }}</v-text-field>
           </v-col>
         </v-row>
-        <v-btn :disabled="valid" color="success" class="mr-4" @click="validate">
+        <v-btn
+          :disabled="false"
+          color="success"
+          class="mr-4"
+          @click="validate, voltaParaResumo(), createTask()"
+        >
           Salvar
         </v-btn>
 
-        <v-btn color="error" class="mr-4" @click="reset"> Excluir </v-btn>
-
-        <v-btn color="warning" @click="resetValidation"> Editar </v-btn>
+        <v-btn color="warning" class="mr-10" @click="reset"> Limpar </v-btn>
       </v-form>
     </v-layout>
   </div>
 </template>
 
 <script>
+import apiMethods from "@/apiMethods.js";
 export default {
   data: () => ({
-    loading: false,
-    selection: 1,
+    dhm: new Date(),
     valid: true,
-    title: "",
     titleRules: [(v) => !!v || "É preciso escrever um titulo!"],
-    conteudo: "",
-    conteudoRules: [(v) => !!v || "É preciso escrever algo"],
-    data: new Date.toString(),
+    conteudoRules: [(v) => !!v || "É preciso selecionar uma opção"],
+    newTask: {
+      title: "",
+      project: "",
+      dueTo: "",
+    },
   }),
 
   methods: {
-    reserve() {
-      this.loading = true;
-
-      setTimeout(() => (this.loading = false), 2000);
+    voltaParaResumo() {
+      this.$router.push("/resumo");
     },
     voltaParaLogin() {
       this.$router.push("/login");
@@ -81,6 +86,9 @@ export default {
     },
     resetValidation() {
       this.$refs.form.resetValidation();
+    },
+    createTask() {
+      apiMethods.createData(this.newTask);
     },
   },
 };

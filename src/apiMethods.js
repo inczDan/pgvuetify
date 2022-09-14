@@ -10,4 +10,19 @@ export default {
       callback(response.data);
     });
   },
+  createData: (task, callback) => {
+    axios.post("/tasks", task).then((response) => {
+      callback(response.data);
+    });
+  },
+  deleteData: (taskId, callback) => {
+    axios.delete(`/tasks/${taskId}`).then((response) => {
+      callback(response.data);
+    });
+  },
+  updateData: (taskId, callback) => {
+    axios.put(`/tasks/${taskId}`).then((response) => {
+      callback(response.data);
+    });
+  },
 };
