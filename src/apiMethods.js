@@ -15,13 +15,20 @@ export default {
       callback(response.data);
     });
   },
-  deleteData: (taskId, callback) => {
-    axios.delete(`/tasks/${taskId}`).then((response) => {
-      callback(response.data);
+  deleteData: (taskId) => {
+    return new Promise((resolve, reject) => {
+      axios
+        .delete(`/tasks/${taskId}`)
+        .then((response) => {
+          return resolve(response.data);
+        })
+        .catch((error) => {
+          return reject(error);
+        });
     });
   },
-  updateData: (taskId, callback) => {
-    axios.put(`/tasks/${taskId}`).then((response) => {
+  updateData: (taskId, callback, task) => {
+    axios.put(`/tasks/${taskId}`, task).then((response) => {
       callback(response.data);
     });
   },

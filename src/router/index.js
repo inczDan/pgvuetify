@@ -5,6 +5,7 @@ import LoginView from "@/views/LoginView.vue";
 import RegistroView from "@/views/RegistroView.vue";
 import InicioView from "@/views/InicioView.vue";
 import PainelResumoView from "@/views/PainelResumoView.vue";
+import FavoritosView from "@/views/FavoritosView.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -37,6 +38,11 @@ const routes = [
     path: "/registrar",
     name: "registrar",
     component: RegistroView,
+  },
+  {
+    path: "/favoritos",
+    name: "registrar",
+    component: FavoritosView,
   },
   {
     path: "/resumo",

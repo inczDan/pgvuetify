@@ -54,45 +54,53 @@
 
                     <v-card-actions>
                       <v-btn
-                        v-if="item.artist === 'Ellie Goulding'"
-                        class="ml-2 mt-3"
-                        fab
-                        icon
-                        height="40px"
-                        right
-                        width="40px"
+                        class="ml-2 mt-5"
+                        outlined
+                        rounded
+                        small
+                        @click="vaiParaFavoritos"
                       >
-                        <v-icon>mdi-play</v-icon>
-                      </v-btn>
-
-                      <v-btn v-else class="ml-2 mt-5" outlined rounded small>
                         Visualizar
                       </v-btn>
                     </v-card-actions>
                   </div>
-
-                  <v-avatar class="ma-3" size="125" tile>
-                    <v-img :src="item.src"></v-img>
-                  </v-avatar>
                 </div>
               </v-card>
             </v-col>
           </v-row>
-          <div>
-            <ul>
-              <li v-for="i in tasks" :key="i.id">
-                <p>{{ i.project }}</p>
-                <p>{{ i.title }}</p>
-              </li>
-            </ul>
-          </div>
         </v-container>
       </v-card>
       <router-view></router-view>
     </v-container>
 
     <v-footer app>
-      <!-- -->
+      <div>
+        <v-card
+          v-for="task in tasks"
+          :key="task.id"
+          class="mx-auto"
+          max-width="344"
+          outlined
+        >
+          <v-list-item three-line>
+            <v-list-item-content>
+              <div class="text-overline mb-4">{{ task.project }}</div>
+              <v-list-item-title class="text-h5 mb-1">
+                {{ task.title }}
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-card-actions>
+            <v-btn outlined rounded text @click="editTask(task)">
+              Editar
+            </v-btn>
+            <v-btn outlined rounded text @click="removeTask(task)">
+              Deletar
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </div>
     </v-footer>
   </v-app>
 </template>
@@ -118,12 +126,24 @@ export default {
     ],
   }),
   methods: {
+    vaiParaArquivados() {
+      this.$router.push("/arquivados");
+    },
+    vaiParaFavoritos() {
+      this.$router.push("/favoritos");
+    },
+
     vaiParaCriarAnotacao() {
       this.$router.push("/anotacao");
     },
     getTasks() {
       apiMethods.getData((data) => {
         this.tasks = data;
+      });
+    },
+    removeTask(task) {
+      apiMethods.deleteData(task.id).then(() => {
+        this.getTasks();
       });
     },
   },
