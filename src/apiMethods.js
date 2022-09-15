@@ -11,6 +11,7 @@ export default {
     });
   },
   createData: (task, callback) => {
+    // o verbo post esta presente ao lado do axios, identificando o desejo de criar uma nova nota
     axios.post("/tasks", task).then((response) => {
       callback(response.data);
     });

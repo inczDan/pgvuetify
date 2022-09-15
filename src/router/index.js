@@ -6,6 +6,8 @@ import RegistroView from "@/views/RegistroView.vue";
 import InicioView from "@/views/InicioView.vue";
 import PainelResumoView from "@/views/PainelResumoView.vue";
 import FavoritosView from "@/views/FavoritosView.vue";
+import EditarView from "@/views/EditarView.vue";
+import ArquivadosView from "@/views/ArquivadosView.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -45,9 +47,20 @@ const routes = [
     component: FavoritosView,
   },
   {
+    path: "/arquivados",
+    name: "arquivados",
+    component: ArquivadosView,
+  },
+
+  {
     path: "/resumo",
-    name: "resumo-anotações",
+    name: "resumoAnotações",
     component: PainelResumoView,
+  },
+  {
+    path: "/editar/:id",
+    name: "editarTarefas",
+    component: EditarView,
   },
 ];
 
